@@ -10,6 +10,7 @@ import { env } from "@/configs/env";
 import { logDir, logger } from "@/configs/logger";
 import { globalRateLimit } from "@/plugins/rate-limit";
 import { cleanRefreshToken } from "./plugins/cleanup-refresh-token";
+import { notFound } from "./plugins/not-found";
 
 if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir, { recursive: true });
@@ -27,6 +28,7 @@ new Elysia()
     .use(globalRateLimit)
     .use(cleanRefreshToken)
     .use(app)
+    .use(notFound)
     .listen(env.PORT, async (server) => {
         await connectDB();
 
