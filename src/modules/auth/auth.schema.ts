@@ -1,4 +1,5 @@
 import { t } from "elysia";
+import { env } from "@/configs/env";
 
 export const loginSchema = t.Object({
     email: t.String({ format: "email" }),
@@ -12,6 +13,16 @@ export const registerSchema = t.Object({
 });
 
 export const authResData = t.Object({
-    token: t.String(),
+    accessToken: t.String(),
     exp: t.Union([t.String(), t.Number()]),
 });
+
+export const cookieSchema = t.Cookie(
+    {
+        refresh: t.Optional(t.String()),
+    },
+    {
+        secrets: env.COOKIE_SECRET,
+        sign: ["refresh"],
+    },
+);

@@ -1,10 +1,10 @@
 import { Schema, model } from "mongoose";
-import bcrypt from "bcryptjs";
 
 interface IUser {
     _id: string;
     name: string;
     email: string;
+    emailVerifiedAt?: Date;
     password: string;
 }
 
@@ -16,6 +16,7 @@ const userSchema = new Schema<IUser>(
         },
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
+        emailVerifiedAt: { type: Date },
         password: { type: String, required: true },
     },
     {
@@ -25,7 +26,7 @@ const userSchema = new Schema<IUser>(
 
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
-    this.password = await bcrypt.hash(this.password, 10);
+    this.password = await Bun.password.hash(this.password);
     next();
 });
 

@@ -14,7 +14,7 @@ export const app = new Elysia({ prefix: "/api/v1", name: "base" })
         switch (code) {
             case "API_ERROR": {
                 const apiResponse = ApiResponse.failure(error.message, null, error.statusCode);
-                return status(apiResponse.statusCode, { ...apiResponse });
+                return status(apiResponse.statusCode, apiResponse.toJSON());
             }
             case "VALIDATION": {
                 const apiResponse = ApiResponse.failure(
@@ -22,19 +22,20 @@ export const app = new Elysia({ prefix: "/api/v1", name: "base" })
                     null,
                     StatusCodes.UNPROCESSABLE_ENTITY,
                 );
-                return status(apiResponse.statusCode, { ...apiResponse });
+                return status(apiResponse.statusCode, apiResponse.toJSON());
             }
             case "NOT_FOUND": {
                 const apiResponse = ApiResponse.failure(error.message, null, StatusCodes.NOT_FOUND);
-                return status(apiResponse.statusCode, { ...apiResponse });
+                return status(apiResponse.statusCode, apiResponse.toJSON());
             }
             default: {
+                console.log(error);
                 const apiResponse = ApiResponse.failure(
                     "Something went wrong",
                     null,
                     StatusCodes.INTERNAL_SERVER_ERROR,
                 );
-                return status(apiResponse.statusCode, { ...apiResponse });
+                return status(apiResponse.statusCode, apiResponse.toJSON());
             }
         }
     })

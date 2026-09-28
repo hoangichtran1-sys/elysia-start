@@ -1,6 +1,6 @@
-import { t, type Static } from "elysia";
-import { Value } from "@sinclair/typebox/value";
+import { t } from "elysia";
 import dotenv from "dotenv";
+import { safeParse } from "@/utils/safe-parse";
 
 dotenv.config();
 
@@ -28,20 +28,11 @@ const envSchema = t.Object({
 
     JWT_SECRET: t.String({ minLength: 10 }),
     JWT_EXPIRED: t.Union([t.String(), t.Number()]),
+
+    COOKIE_SECRET: t.String({ minLength: 6 }),
 });
 
-const filledEnv = Value.Default(envSchema, process.env);
-
-const isValid = Value.Check(envSchema, filledEnv);
-
-if (!isValid) {
-    const errors = [...Value.Errors(envSchema, filledEnv)];
-    console.error("❌ Invalid environment variables:", errors);
-    throw new Error("Invalid environment variables");
-}
-
-type Env = Static<typeof envSchema>;
-const parsedEnv = filledEnv as Env;
+const parsedEnv = safeParse(envSchema, process.env);
 
 export const env = {
     ...parsedEnv,
