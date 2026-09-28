@@ -1,4 +1,3 @@
-import { StatusCodes } from "http-status-codes";
 import { type TSchema } from "elysia";
 export declare class ApiResponse<T = null> {
     readonly success: boolean;
@@ -19,5 +18,5 @@ export declare const ApiResponseSchema: <T extends TSchema>(dataSchema: T) => im
     success: import("@sinclair/typebox").TBoolean;
     message: import("@sinclair/typebox").TString;
     data: T;
-    statusCode: import("@sinclair/typebox").TEnum<typeof StatusCodes>;
+    statusCode: import("@sinclair/typebox").TNumber;
 }>;

@@ -8,6 +8,9 @@ export declare const registerSchema: import("@sinclair/typebox").TObject<{
     password: import("@sinclair/typebox").TString;
 }>;
 export declare const authResData: import("@sinclair/typebox").TObject<{
-    token: import("@sinclair/typebox").TString;
+    accessToken: import("@sinclair/typebox").TString;
     exp: import("@sinclair/typebox").TUnion<[import("@sinclair/typebox").TString, import("@sinclair/typebox").TNumber]>;
+}>;
+export declare const cookieSchema: import("@sinclair/typebox").TObject<{
+    refresh: import("@sinclair/typebox").TOptional<import("@sinclair/typebox").TString>;
 }>;

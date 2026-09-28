@@ -10,4 +10,5 @@ export declare const env: {
     DATABASE_URL: string;
     JWT_SECRET: string;
     JWT_EXPIRED: string | number;
+    COOKIE_SECRET: string;
 };

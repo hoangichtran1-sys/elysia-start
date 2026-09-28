@@ -26,7 +26,7 @@ export declare const healthRouter: Elysia<"/health", {
                     success: boolean;
                     message: string;
                     data: any;
-                    statusCode: import("http-status-codes").StatusCodes;
+                    statusCode: number;
                 };
                 422: {
                     type: "validation";
