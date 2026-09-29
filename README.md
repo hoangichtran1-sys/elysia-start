@@ -1,4 +1,4 @@
-# Elysia + Bun + MongoDB/Mongoose + Authentication with JWT
+# Elysia + Bun + MongoDB/Mongoose + Authentication with JWT + Scalar OpenAPI
 
 To install dependencies:
 
