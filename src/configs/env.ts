@@ -1,8 +1,5 @@
 import { t } from "elysia";
-import dotenv from "dotenv";
 import { safeParse } from "@/utils/safe-parse";
-
-dotenv.config();
 
 const envSchema = t.Object({
     NODE_ENV: t.Union([t.Literal("production"), t.Literal("development"), t.Literal("test")], {
@@ -32,7 +29,7 @@ const envSchema = t.Object({
     COOKIE_SECRET: t.String({ minLength: 6 }),
 });
 
-const parsedEnv = safeParse(envSchema, process.env);
+const parsedEnv = safeParse(envSchema, Bun.env);
 
 export const env = {
     ...parsedEnv,

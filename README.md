@@ -1,4 +1,4 @@
-# bun_auth
+# Elysia + Bun + MongoDB/Mongoose + Authentication with JWT
 
 To install dependencies:
 
@@ -9,7 +9,8 @@ bun install
 To run:
 
 ```bash
-bun run index.ts
+bun run dev (Development)
+bun start (Production)
 ```
 
 This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

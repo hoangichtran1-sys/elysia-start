@@ -16,7 +16,7 @@ if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir, { recursive: true });
 }
 
-new Elysia()
+const server = new Elysia()
     .use(serverTiming())
     .use(openapi())
     .use(
@@ -40,3 +40,12 @@ new Elysia()
         console.log("--------------------------------------------------");
         logger.info(`Server (${env.NODE_ENV}) running on port http://${env.HOST}:${env.PORT}`);
     });
+
+const onCloseSignal = () => {
+    logger.info("Sigint received, shutting down");
+
+    setTimeout(() => process.exit(1), 10000).unref(); // Force shutdown after 10s
+};
+
+process.on("SIGINT", onCloseSignal);
+process.on("SIGTERM", onCloseSignal);
