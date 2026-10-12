@@ -1,5 +1,5 @@
 import { t } from "elysia";
-import type { JWTOption } from "@elysiajs/jwt";
+import type { JWTOption } from "@elysia/jwt";
 import { env } from "@/configs/env";
 
 const payloadSchema = t.Object({ userId: t.String() });
